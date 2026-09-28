@@ -2,6 +2,7 @@ import Link from "next/link";
 import Logo from "@/components/Logo";
 import { site, footerNav, socials } from "@/data/site";
 import ArrowUpRight from "@/components/ArrowUpRight";
+import Image from "next/image";
 
 export default function Footer() {
   return (
@@ -23,7 +24,7 @@ export default function Footer() {
 
         <div className="grid grid-cols-2 gap-10 py-14 md:grid-cols-4">
           <div className="col-span-2 flex flex-col gap-4 md:col-span-1">
-            <Logo className="h-6 w-auto text-bone" />
+            <Image src="/Logo.png" width={120} height={100} className=" object-cover" alt="logo"/>
             <p className="max-w-[220px] text-sm leading-relaxed text-mute">
               A studio designing and building websites for brands and businesses.
             </p>

@@ -27,7 +27,7 @@ export default function Cursor() {
 
     const onOver = (e) => {
       if (e.target.closest('[data-cursor="hover"]')) {
-        gsap.to(ring, { width: 70, height: 70, duration: 0.3, ease: "power3.out" });
+        gsap.to(ring, { width: 50, height: 50, duration: 0.3, ease: "power3.out" });
         gsap.to(dot, { scale: 0, duration: 0.2 });
       }
     };

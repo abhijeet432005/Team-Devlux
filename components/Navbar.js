@@ -7,6 +7,7 @@ import gsap from "gsap";
 import Logo from "@/components/Logo";
 import ThemeToggle from "@/components/ThemeToggle";
 import { nav, site } from "@/data/site";
+import Image from "next/image";
 
 const CLOSED = "inset(0% 0% 100% 0%)";
 const OPEN = "inset(0% 0% 0% 0%)";
@@ -94,9 +95,10 @@ function NavbarForRoute({ pathname }) {
         className={`fixed inset-x-0 top-0 z-140 transition-transform duration-500 ease-signature ${headerHidden ? "-translate-y-full" : "translate-y-0"
           }`}
       >
-        <div className="mx-auto flex max-w-[1440px] items-center justify-between px-6 py-5 md:px-10">
+        <div className="mx-auto flex max-w-[1440px] items-center justify-between px-6 py-5 ">
           <Link href="/" onClick={() => setOpen(false)} data-cursor="hover" className="text-bone">
-            <Logo className="h-6 w-auto md:h-7" />
+            {/* <Logo className="h-6 w-auto md:h-7" /> */}
+            <Image src="/Logo.png" width={120} height={100} className=" object-cover" alt="logo"/>
           </Link>
 
           <nav className="hidden items-center gap-9 md:flex" aria-label="Main">
