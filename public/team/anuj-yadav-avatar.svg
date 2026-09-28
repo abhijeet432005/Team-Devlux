@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="520" height="650" viewBox="0 0 520 650">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#d9cbb4"/>
+      <stop offset="100%" stop-color="#a99a80"/>
+    </linearGradient>
+    <linearGradient id="silhouette" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#766a59"/>
+      <stop offset="100%" stop-color="#5f5444"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="520" height="650" fill="url(#bg)"/>
+
+  <!-- Head -->
+  <circle cx="260" cy="248" r="92" fill="url(#silhouette)"/>
+
+  <!-- Body / shoulders -->
+  <path
+    d="M70 650
+       V620
+       C70 494 145 392 260 392
+       C375 392 450 494 450 620
+       V650
+       Z"
+    fill="url(#silhouette)"
+  />
+
+  <!-- Initials -->
+  <text
+    x="34"
+    y="612"
+    font-family="Arial, Helvetica, sans-serif"
+    font-size="64"
+    font-weight="700"
+    fill="#ffffff"
+    letter-spacing="-4"
+  >AY</text>
+</svg>

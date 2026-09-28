@@ -158,9 +158,9 @@ export default function TeamList({ members, hintDesktop, hintMobile }) {
 
                 <span className="team-cols max-w-sm">
                   <span className="block text-sm leading-relaxed text-mute">{m.work}</span>
-                  <span className="mt-2 block text-xs text-mute/70">
+                  {/* <span className="mt-2 block text-xs text-mute/70">
                     Worked on {m.projects.join(", ")}
-                  </span>
+                  </span> */}
                 </span>
 
                 <span
