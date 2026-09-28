@@ -13,12 +13,13 @@ const OPEN = "inset(0% 0% 0% 0%)";
 
 export default function Navbar() {
   const pathname = usePathname();
+  return <NavbarForRoute key={pathname} pathname={pathname} />;
+}
+
+function NavbarForRoute({ pathname }) {
   const [hidden, setHidden] = useState(false);
 
-  // The menu is "open for" a specific route, so navigating anywhere closes it automatically.
-  const [openFor, setOpenFor] = useState(null);
-  const open = openFor === pathname;
-  const setOpen = (value) => setOpenFor(value ? pathname : null);
+  const [open, setOpen] = useState(false);
 
   const menuRef = useRef(null);
   const wasOpen = useRef(false);
@@ -39,17 +40,22 @@ export default function Navbar() {
   useEffect(() => {
     const mq = window.matchMedia("(min-width: 768px)");
     const onChange = (e) => {
-      if (e.matches) setOpenFor(null);
+      if (e.matches) setOpen(false);
     };
     mq.addEventListener("change", onChange);
     return () => mq.removeEventListener("change", onChange);
+  }, []);
+
+  useEffect(() => () => {
+    document.documentElement.classList.remove("overflow-hidden");
+    window.__lenis?.start();
   }, []);
 
   // Escape closes the menu
   useEffect(() => {
     if (!open) return;
     const onKey = (e) => {
-      if (e.key === "Escape") setOpenFor(null);
+      if (e.key === "Escape") setOpen(false);
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
@@ -85,12 +91,11 @@ export default function Navbar() {
   return (
     <>
       <header
-        className={`fixed inset-x-0 top-0 z-140 transition-transform duration-500 ease-signature ${
-          headerHidden ? "-translate-y-full" : "translate-y-0"
-        }`}
+        className={`fixed inset-x-0 top-0 z-140 transition-transform duration-500 ease-signature ${headerHidden ? "-translate-y-full" : "translate-y-0"
+          }`}
       >
         <div className="mx-auto flex max-w-[1440px] items-center justify-between px-6 py-5 md:px-10">
-          <Link href="/" data-cursor="hover" className="text-bone">
+          <Link href="/" onClick={() => setOpen(false)} data-cursor="hover" className="text-bone">
             <Logo className="h-6 w-auto md:h-7" />
           </Link>
 
@@ -100,9 +105,8 @@ export default function Navbar() {
                 key={item.href}
                 href={item.href}
                 data-cursor="hover"
-                className={`text-sm font-medium transition-colors ${
-                  pathname === item.href ? "text-bone" : "text-mute hover:text-bone"
-                }`}
+                className={`text-sm font-medium transition-colors ${pathname === item.href ? "text-bone" : "text-mute hover:text-bone"
+                  }`}
               >
                 {item.label}
               </Link>
@@ -130,14 +134,12 @@ export default function Navbar() {
               aria-controls="mobile-nav"
             >
               <span
-                className={`h-px w-6 bg-bone transition-transform duration-300 ${
-                  open ? "translate-y-[3.5px] rotate-45" : ""
-                }`}
+                className={`h-px w-6 bg-bone transition-transform duration-300 ${open ? "translate-y-[3.5px] rotate-45" : ""
+                  }`}
               />
               <span
-                className={`h-px w-6 bg-bone transition-transform duration-300 ${
-                  open ? "-translate-y-[3.5px] -rotate-45" : ""
-                }`}
+                className={`h-px w-6 bg-bone transition-transform duration-300 ${open ? "-translate-y-[3.5px] -rotate-45" : ""
+                  }`}
               />
             </button>
           </div>
@@ -156,6 +158,7 @@ export default function Navbar() {
             <div key={item.href} className="overflow-hidden py-2">
               <Link
                 href={item.href}
+                onClick={() => setOpen(false)}
                 className="mobile-nav-link block font-display text-5xl tracking-tightest text-bone"
               >
                 <span className="mr-3 align-top font-mono text-sm text-mute">0{i + 1}</span>
