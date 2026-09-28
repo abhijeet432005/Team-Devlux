@@ -102,6 +102,14 @@ html.lenis {
   overflow: hidden;
 }
 
+html {
+  scrollbar-width: none; /* Firefox */
+}
+
+html::-webkit-scrollbar {
+  display: none; /* Chrome, Edge, Safari */
+}
+
 /* ---------- Theme switch animation ---------- */
 /* Primary: View Transitions API circular reveal (driven from ThemeToggle.js) */
 ::view-transition-old(root),
