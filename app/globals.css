@@ -1,0 +1,321 @@
+@import "tailwindcss";
+
+/* Tailwind v4: design tokens live in CSS. Colors point at the runtime theme variables below. */
+@theme inline {
+  --color-ink: rgb(var(--ink));
+  --color-surface: rgb(var(--surface));
+  --color-panel: rgb(var(--panel));
+  --color-paper: rgb(var(--paper));
+  --color-bone: rgb(var(--bone));
+  --color-mute: rgb(var(--mute));
+  --color-line: rgb(var(--line));
+  --color-signal: rgb(var(--signal));
+  --color-signal2: rgb(var(--signal2));
+
+  --font-display: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-plex), ui-monospace, monospace;
+
+  --text-clamp-hero: clamp(2.75rem, 7vw, 8rem);
+  --text-clamp-xl: clamp(2.25rem, 4.5vw, 4.5rem);
+  --text-clamp-lg: clamp(1.75rem, 3vw, 2.75rem);
+
+  --tracking-tightest: -0.04em;
+  --ease-signature: cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+/* ---------- Theme tokens (RGB channels so Tailwind alpha modifiers work) ---------- */
+:root,
+[data-theme="dark"] {
+  --ink: 11 12 15;
+  --surface: 17 19 25;
+  --panel: 21 23 30;
+  --paper: 237 236 231;
+  --bone: 245 244 239;
+  --mute: 138 141 151;
+  --line: 42 44 52;
+  --signal: 77 95 255;
+  --signal2: 139 150 255;
+  color-scheme: dark;
+}
+
+[data-theme="light"] {
+  --ink: 244 243 238;
+  --surface: 255 255 255;
+  --panel: 234 233 227;
+  --paper: 24 25 30;
+  --bone: 11 12 15;
+  --mute: 104 107 117;
+  --line: 216 215 208;
+  --signal: 77 95 255;
+  --signal2: 61 76 224;
+  color-scheme: light;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    background: rgb(var(--ink));
+  }
+
+  body {
+    background: rgb(var(--ink));
+    color: rgb(var(--paper));
+    font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: rgb(var(--signal));
+    color: #fff;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  button {
+    cursor: pointer;
+    font-family: inherit;
+  }
+
+  :focus-visible {
+    outline: 2px solid rgb(var(--signal));
+    outline-offset: 3px;
+  }
+}
+
+html.lenis {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* ---------- Theme switch animation ---------- */
+/* Primary: View Transitions API circular reveal (driven from ThemeToggle.js) */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+::view-transition-old(root) {
+  z-index: 1;
+}
+::view-transition-new(root) {
+  z-index: 2;
+}
+
+/* Fallback: smooth cross-fade of colors for browsers without View Transitions */
+html.theme-fade,
+html.theme-fade *,
+html.theme-fade *::before,
+html.theme-fade *::after {
+  transition: background-color 0.55s ease, color 0.55s ease, border-color 0.55s ease,
+    fill 0.55s ease, stroke 0.55s ease !important;
+}
+
+/* Theme toggle icon morph */
+.theme-toggle .icon-sun,
+.theme-toggle .icon-moon {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  transition: transform 0.6s cubic-bezier(0.76, 0, 0.24, 1), opacity 0.4s ease;
+}
+[data-theme="dark"] .theme-toggle .icon-sun {
+  transform: rotate(0) scale(1);
+  opacity: 1;
+}
+[data-theme="dark"] .theme-toggle .icon-moon {
+  transform: rotate(-90deg) scale(0.3);
+  opacity: 0;
+}
+[data-theme="light"] .theme-toggle .icon-sun {
+  transform: rotate(90deg) scale(0.3);
+  opacity: 0;
+}
+[data-theme="light"] .theme-toggle .icon-moon {
+  transform: rotate(0) scale(1);
+  opacity: 1;
+}
+
+/* Returning visitors skip the preloader (attribute is set by the inline script in layout.js) */
+html[data-visited] .preloader {
+  display: none;
+}
+
+/* ---------- Custom cursor (white + difference blend works on both themes) ---------- */
+.cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #fff;
+  pointer-events: none;
+  z-index: 200;
+  mix-blend-mode: difference;
+  transform: translate(-50%, -50%);
+  will-change: transform;
+}
+
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  pointer-events: none;
+  z-index: 199;
+  mix-blend-mode: difference;
+  transform: translate(-50%, -50%);
+  will-change: transform;
+  transition: width 0.25s cubic-bezier(0.76, 0, 0.24, 1), height 0.25s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+@media (hover: none) {
+  .cursor-dot,
+  .cursor-ring {
+    display: none;
+  }
+}
+
+/* ---------- Marquees ---------- */
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 34s linear infinite;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marquee-reverse {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.marquee-row:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+.testimonial-track {
+  display: flex;
+  width: max-content;
+}
+
+.testimonial-track--left {
+  animation: marquee 52s linear infinite;
+}
+
+.testimonial-track--right {
+  animation: marquee-reverse 60s linear infinite;
+}
+
+.testimonial-row:hover .testimonial-track {
+  animation-play-state: paused;
+}
+
+/* ---------- Team list ----------
+   Default (phones, tablets, any touch device): tap-to-expand accordion, no hover effects.
+   Hover-follow photo is only enabled for a real mouse on screens >= 768px. */
+.team-row {
+  transition: opacity 0.4s ease;
+}
+.team-name {
+  transition: transform 0.5s cubic-bezier(0.76, 0, 0.24, 1), color 0.3s ease;
+}
+.team-cols,
+.team-floating,
+.team-hint-desktop {
+  display: none;
+}
+
+@media (min-width: 768px) and (hover: hover) and (pointer: fine) {
+  .team-row-btn {
+    grid-template-columns: 1.3fr 1fr 1.5fr;
+    gap: 2.5rem;
+    padding-block: 2.5rem;
+  }
+  .team-inline-role,
+  .team-plus,
+  .team-mobile-panel,
+  .team-hint-mobile {
+    display: none;
+  }
+  .team-cols,
+  .team-floating {
+    display: block;
+  }
+  .team-hint-desktop {
+    display: inline;
+  }
+  .team-list:hover .team-row {
+    opacity: 0.28;
+  }
+  .team-list .team-row:hover {
+    opacity: 1;
+  }
+  .team-row:hover .team-name {
+    transform: translateX(18px);
+  }
+}
+
+/* ---------- Misc helpers ---------- */
+.reveal-line {
+  overflow: hidden;
+}
+
+.char-mask {
+  display: inline-block;
+  overflow: hidden;
+}
+
+.hairline {
+  height: 1px;
+  background: rgb(var(--line));
+}
+
+.noise {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.035;
+  z-index: 1;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

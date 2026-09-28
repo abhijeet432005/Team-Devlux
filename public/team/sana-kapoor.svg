@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 650" width="520" height="650">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#D9C7A8"/>
+      <stop offset="1" stop-color="#4A3B26"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.3" cy="0.2" r="0.7">
+      <stop offset="0" stop-color="#fff" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="520" height="650" fill="url(#bg)"/>
+  <rect width="520" height="650" fill="url(#glow)"/>
+  <circle cx="260" cy="248" r="92" fill="#4A3B26" fill-opacity="0.55"/>
+  <path d="M70 650C70 470 160 392 260 392S450 470 450 650Z" fill="#4A3B26" fill-opacity="0.55"/>
+  <text x="34" y="612" font-family="Helvetica, Arial, sans-serif" font-weight="700" font-size="64" letter-spacing="-2" fill="#fff" fill-opacity="0.92">SK</text>
+</svg>
