@@ -1,7 +1,5 @@
 import { video } from "framer-motion/client";
 
-
-
 export const workData = {
   hero: {
     eyebrow: "Selected work",
