@@ -56,7 +56,7 @@ export const aboutData = {
         role: "Founding Consultant",
         work: "Shapes project direction from the first conversation, turning client goals into clear strategies, creative direction, and focused execution.",
         projects: ["Nordholm", "Arclight Studio"],
-        image: "/team/rohan-bhatt.svg",
+        image: "/team/Ayush.jpg",
       },
       {
         name: "Abhijeet Kumar",
