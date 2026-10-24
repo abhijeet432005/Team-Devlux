@@ -39,10 +39,10 @@ export const aboutData = {
     ],
   },
   stats: [
-    { value: 100, suffix: "+", label: "Websites launched" },
-    { value: 35, suffix: "+", label: "Industries served" },
-    { value: 14, suffix: "", label: "People on the team" },
-    { value: 7, suffix: "", label: "Years in business" },
+    { value: 20, suffix: "+", label: "Websites launched" },
+    { value: 5, suffix: "+", label: "Industries served" },
+    { value: 4, suffix: "", label: "People on the team" },
+    { value: 2, suffix: "", label: "Years in business" },
   ],
   team: {
     label: "The team",

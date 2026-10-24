@@ -10,6 +10,14 @@ export const site = {
   location: "New Delhi, India — working worldwide",
   foundedYear: 2019,
   clientsServed: "100+",
+
+  whatsapp: {
+    // country code + number, digits only (no +, spaces or dashes)
+    number: "918178089600",
+    message:
+      "Hi Team Devlux! \n\nI came across your website and I'd love to discuss a project with you.\n\nProject type: (new website / redesign / e-commerce / web app)\nBusiness name:\nBudget range:\nTimeline:\n\nLooking forward to hearing from you!",
+    label: "Chat on WhatsApp",
+  },
 };
 
 export const nav = [

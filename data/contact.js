@@ -9,7 +9,13 @@ export const contactData = {
     { label: "Phone", value: "+91 98765 43210", href: "tel:+919876543210" },
     { label: "Studio", value: "New Delhi, India — working worldwide", href: null },
   ],
-  budgetRanges: ["Under $5k", "$5k – $15k", "$15k – $40k", "$40k+"],
+  // budgetRanges: ["Under $5k", "$5k – $15k", "$15k – $40k", "$40k+"],
+  budgetRanges: [
+    "Under ₹25,000",
+    "₹25,000 – ₹35,000",
+    "₹35,000 – ₹45,000",
+    "₹50,000+",
+  ],
   timelines: ["ASAP", "1–3 months", "3–6 months", "Just exploring"],
   faq: [
     {

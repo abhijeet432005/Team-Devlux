@@ -6,6 +6,7 @@ import Preloader from "@/components/Preloader";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { site } from "@/data/site";
+import WhatsAppButton from "@/components/Whatsappbutton";
 
 export const metadata = {
   metadataBase: new URL(site.url),
@@ -99,6 +100,7 @@ export default function RootLayout({ children }) {
         <div className="noise" />
         <Preloader />
         <Cursor />
+        <WhatsAppButton />
         <SmoothScroll>
           <Navbar />
           <main>{children}</main>

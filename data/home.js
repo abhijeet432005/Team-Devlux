@@ -6,10 +6,10 @@ export const homeData = {
     cta: { label: "Start a project", href: "/contact" },
     secondaryCta: { label: "See our work", href: "/work" },
     stats: [
-      { value: 100, suffix: "+", label: "Websites shipped" },
-      { value: 92, suffix: "%", label: "Client retention" },
-      { value: 3, suffix: "", label: "Years building" },
-      { value: 15, suffix: "+", label: "Industries served" },
+      { value: 20, suffix: "+", label: "Websites shipped" },
+      // { value: 92, suffix: "%", label: "Client retention" },
+      { value: 2, suffix: "", label: "Years building" },
+      { value: 5, suffix: "+", label: "Industries served" },
     ],
   },
   marquee: [
